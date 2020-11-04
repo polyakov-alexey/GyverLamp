@@ -42,8 +42,17 @@ void buttonTick() {
     sendSettings_flag = true;
   }
 
-  // вывод IP на лампу
   if (ONflag && touch.hasClicks()) {
+    // вывод времени на лампу
+    if (touch.getClicks() == 4) {
+      resetString();
+      while (!fillString(timeStr, CRGB::White, true)) {
+        delay(1);
+        ESP.wdtFeed();   // пнуть собаку
+        yield();  // ещё раз пнуть собаку
+      }
+    }
+    // вывод IP на лампу
     if (touch.getClicks() == 5) {
       resetString();
       while (!fillString(lampIP, CRGB::Green, true)) {
